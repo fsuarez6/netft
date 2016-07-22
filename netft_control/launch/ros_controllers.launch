@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- launch file parameters -->
+  <arg name="namespace" default="netft" />
+  <arg name="debug"     default="true" />
+  
+  <group ns="$(arg namespace)">
+    <rosparam>
+      ft_sensor_controller:
+        type: force_torque_sensor_controller/ForceTorqueSensorController
+    </rosparam>
+    <!-- load controller -->
+    <group if="$(arg debug)">
+      <node name="robot_controllers" pkg="controller_manager" type="spawner" output="screen" args="ft_sensor_controller"/>
+    </group>
+    <group unless="$(arg debug)">
+      <node name="robot_controllers" pkg="controller_manager" type="spawner" output="log" args="ft_sensor_controller"/>
+    </group>
+  </group>
+</launch>

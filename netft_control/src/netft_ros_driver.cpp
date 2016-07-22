@@ -54,7 +54,7 @@
 #include <hardware_interface/robot_hw.h>
 
 // netft_rdt_driver
-#include "netft_rdt_driver/netft_rdt_driver.h"
+#include "netft_control/netft_rdt_driver.h"
 
 
 #define DEFAULT_IP_ADDRESS        "192.168.0.11"

@@ -32,7 +32,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-#include "netft_rdt_driver/netft_rdt_driver.h"
+#include "netft_control/netft_rdt_driver.h"
 #include <stdint.h>
 #include <exception>
 

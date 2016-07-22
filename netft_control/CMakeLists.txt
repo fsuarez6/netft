@@ -50,7 +50,7 @@ target_link_libraries(netft_ros_driver netft_rdt_driver ${catkin_LIBRARIES} ${Bo
 #############
 
 ## Mark executables and/or libraries for installation
- install(TARGETS netft_rdt_driver netft_node
+ install(TARGETS netft_rdt_driver netft_node netft_ros_driver
    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

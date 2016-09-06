@@ -16,6 +16,7 @@ find_package(Boost REQUIRED COMPONENTS system thread program_options)
 find_package(CURL REQUIRED)
 find_package(TinyXML REQUIRED)
 
+catkin_python_setup()
 
 catkin_package(
   INCLUDE_DIRS include

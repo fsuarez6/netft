@@ -3,31 +3,11 @@ import rospy
 import collections
 import numpy as np
 from criros.conversions import from_wrench
-from criros.utils import read_parameter
+from criros.utils import read_parameter, solve_namespace
 # Messages
 from denso_msgs.msg import EndpointState
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus
 from geometry_msgs.msg import WrenchStamped
-
-def solve_namespace(namespace=''):
-  """
-  Appends neccessary slashes required for a proper ROS namespace.
-  @type namespace: string
-  @param namespace: namespace to be fixed.
-  @rtype: string
-  @return: Proper ROS namespace.
-  """
-  if len(namespace) == 0:
-    namespace = rospy.get_namespace()
-  elif len(namespace) == 1:
-    if namespace != '/':
-      namespace = '/' + namespace + '/'
-  else:
-    if namespace[0] != '/':
-      namespace = '/' + namespace
-    if namespace[-1] != '/':
-      namespace += '/'
-  return namespace
 
 
 class FTSensor(object):
@@ -37,8 +17,7 @@ class FTSensor(object):
   This class checks for errors in the FT sensor and returns the raw and compensated values along with the sensor status and readings timestamp.
   """
   queue_len = 10
-
-  def __init__(self, namespace='', timeout=3.0):
+  def __init__(self, namespace='', read_compensated=True, timeout=3.0):
     """
     FTSensor constructor. It subscribes to the following topics:
       - C{ft_sensor/diagnostics},
@@ -63,12 +42,13 @@ class FTSensor(object):
       if (rospy.get_time() - initime) > timeout:
         rospy.logwarn('FTSensor: Cannot read raw wrench')
         return
-    initime = rospy.get_time()
-    while not rospy.is_shutdown() and not self.is_compensated_alive():
-      rospy.sleep(0.1)
-      if (rospy.get_time() - initime) > timeout:
-        rospy.logwarn('FTSensor: Cannot read compensated wrench')
-        return
+    if read_compensated:
+      initime = rospy.get_time()
+      while not rospy.is_shutdown() and not self.is_compensated_alive():
+        rospy.sleep(0.1)
+        if (rospy.get_time() - initime) > timeout:
+          rospy.logwarn('FTSensor: Cannot read compensated wrench')
+          return
     rospy.loginfo('FTSensor successfully initialized')
   
   def cb_compensated(self, msg):

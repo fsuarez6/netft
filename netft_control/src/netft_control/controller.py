@@ -31,7 +31,7 @@ class FTSensor(object):
     """
     ns = solve_namespace(namespace)
     # Set-up subscribers
-    self.rate = read_parameter('%sft_sensor_controller/publish_rate' % ns, 250.0)
+    self.rate = read_parameter('%s/ft_sensor/ft_sensor_controller/publish_rate' % ns, 250.0)
     self.raw_queue = collections.deque(maxlen=self.queue_len)
     rospy.Subscriber('%sft_sensor/diagnostics' % ns, DiagnosticArray, self.cb_diagnostics)
     rospy.Subscriber('%sft_sensor/raw' % ns, WrenchStamped, self.cb_raw)

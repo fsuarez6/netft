@@ -174,11 +174,10 @@ int main(int argc, char **argv)
 {
   ros::init (argc, argv, "netft_ros_driver");
   ros::NodeHandle nh;
-  // Background spinners. Very important but don't know why.
-  ros::AsyncSpinner spinner(4);
-  spinner.start();
+  // Multi-threaded spinning
+  ros::MultiThreadedSpinner spinner(4);
   // Start the ros driver
   NetftRosDriver driver;
-  ros::spin();
+  spinner.spin();
   return 0;
 }

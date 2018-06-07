@@ -1,6 +1,6 @@
 # netft
 
-This is a ROS metapackage for the ATI NET/FT box that is used to connect to ATI F/T sensor. 
+This is a ROS metapackage for the ATI NET/FT box that is used to connect to ATI F/T sensor.
 
 ## Compatibility
 
@@ -10,13 +10,21 @@ The `master` branch is compatible with:
 * ROS Indigo
 * ROS Kinetic
 
+## Requirements
+
+Install `curl` manually:
+
+```
+sudo apt-get install libcurl4-openssl-dev
+```
+
 ## Usage
 
 Use the ROS node in the package as a stand-alone node for publishing F/T information. E.g.:
 
 ```
 rosrun netft_control netft_node --address 192.168.1.1
-``` 
+```
 
 The NET/FT box defaults to 192.168.1.1 as its ip address but this can be changed using the browser-based interface.
 

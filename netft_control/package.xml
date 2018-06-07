@@ -13,7 +13,6 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>controller_manager</depend>
-  <depend>curl</depend>
   <depend>diagnostic_msgs</depend>
   <depend>diagnostic_updater</depend>
   <depend>force_torque_sensor_controller</depend>
